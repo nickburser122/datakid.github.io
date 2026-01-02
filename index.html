@@ -15,15 +15,12 @@
             --text-secondary: #6b6b7b;
             --border: #e0e0e6;
             --input-bg: #f9f9fc;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --radius: 12px;
-            --radius-sm: 8px;
             --danger: #ef4444;
             --success: #10b981;
             --warning: #f59e0b;
             --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         [data-theme="dark"] {
@@ -36,11 +33,8 @@
             --border: #35354f;
             --input-bg: #2c2c44;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
         }
 
-        * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-        
         body {
             font-family: var(--font-family);
             background-color: var(--background);
@@ -59,6 +53,7 @@
             padding: 2rem;
             width: 100%;
             flex: 1;
+            padding-bottom: 100px;
         }
 
         header {
@@ -70,28 +65,16 @@
             border-bottom: 1px solid var(--border);
         }
 
-        h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin: 0;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        h1 { margin: 0; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        h1 svg { width: 28px; height: 28px; color: var(--primary); }
 
-        h1 svg { width: 32px; height: 32px; color: var(--primary); }
-
-        /* Grid System */
         .grid-layout {
             display: grid;
             grid-template-columns: 350px 1fr;
             gap: 2rem;
         }
 
-        @media (max-width: 900px) {
-            .grid-layout { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 900px) { .grid-layout { grid-template-columns: 1fr; } }
 
         .card {
             background: var(--surface);
@@ -99,363 +82,190 @@
             padding: 1.5rem;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
-            transition: var(--transition);
         }
 
-        .form-group { margin-bottom: 1.25rem; position: relative; }
+        .form-group { margin-bottom: 1rem; position: relative; }
+        label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-secondary); }
         
-        label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-        }
-
         input, select {
             width: 100%;
-            padding: 0.75rem 1rem;
-            border-radius: var(--radius-sm);
+            padding: 0.75rem;
+            border-radius: 8px;
             border: 1px solid var(--border);
             background: var(--input-bg);
             color: var(--text);
             font-size: 0.95rem;
-            transition: var(--transition);
-            appearance: none;
+            box-sizing: border-box;
         }
 
         input:focus, select:focus {
+            outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.15);
         }
 
-        select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b6b7b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 1.25rem;
-            padding-right: 2.5rem;
-        }
-
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 0.75rem 1.5rem;
+            width: 100%;
+            padding: 0.75rem;
             border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
             border: none;
+            font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            background-color: var(--primary-hover);
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            border: 2px solid var(--border);
-            color: var(--text);
-        }
-
-        .btn-secondary:hover:not(:disabled) {
-            border-color: var(--text-secondary);
-            background-color: var(--input-bg);
-        }
-
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-        .btn-full { width: 100%; }
-
-        .theme-toggle {
-            background: var(--input-bg);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            padding: 4px;
+            transition: all 0.2s;
             display: flex;
-            cursor: pointer;
-            position: relative;
-            width: 64px;
-            height: 34px;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
         }
 
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            width: 24px;
-            height: 24px;
-            background: var(--surface);
-            border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-        }
-
-        [data-theme="dark"] .theme-toggle::after { transform: translateX(30px); }
-
-        .autocomplete-wrapper { position: relative; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-1px); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
         
-        .autocomplete-list {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-top: none;
-            border-radius: 0 0 var(--radius) var(--radius);
-            max-height: 250px;
-            overflow-y: auto;
-            z-index: 50;
-            box-shadow: var(--shadow-lg);
-            display: none;
-        }
+        .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); }
+        .btn-secondary:hover { border-color: var(--text-secondary); background: var(--input-bg); }
 
-        .autocomplete-list.active { display: block; }
-
-        .suggestion-item {
-            padding: 12px 16px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .suggestion-item:last-child { border-bottom: none; }
-        .suggestion-item:hover, .suggestion-item.focused { background-color: var(--input-bg); }
-        .suggestion-item .unit { color: var(--primary); font-size: 0.85em; font-weight: 600; }
-        .suggestion-item.exists { background-color: rgba(239, 68, 68, 0.1); }
-
-        .table-container {
+        .table-wrapper {
             overflow-x: auto;
             border-radius: var(--radius);
             border: 1px solid var(--border);
+            max-height: 70vh;
+            overflow-y: auto;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--surface);
-            text-align: left;
+        table { width: 100%; border-collapse: collapse; background: var(--surface); }
+        th { 
+            background: var(--input-bg); 
+            color: var(--text-secondary); 
+            padding: 1rem; 
+            text-align: left; 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            position: sticky; 
+            top: 0; 
+            z-index: 10;
         }
-
-        th {
-            background-color: var(--input-bg);
-            color: var(--text-secondary);
-            font-weight: 600;
-            padding: 1rem;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            position: sticky;
-            top: 0;
-        }
-
-        td {
-            padding: 1rem;
-            border-top: 1px solid var(--border);
-            font-size: 0.95rem;
-        }
-
-        tr:hover td { background-color: var(--input-bg); }
+        td { padding: 0.8rem 1rem; border-top: 1px solid var(--border); font-size: 0.95rem; }
+        tr:hover td { background: var(--input-bg); }
 
         td[contenteditable="true"] {
             background: rgba(var(--primary-rgb), 0.05);
-            border-radius: 4px;
             cursor: text;
+            transition: background 0.2s;
         }
-
         td[contenteditable="true"]:focus {
             background: var(--surface);
-            box-shadow: 0 0 0 2px var(--primary);
+            box-shadow: inset 0 0 0 2px var(--primary);
+            outline: none;
         }
 
-        .icon-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 6px;
-            border-radius: 50%;
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
-
-        .icon-btn:hover { background-color: rgba(239, 68, 68, 0.1); color: var(--danger); }
-        .icon-btn svg { width: 18px; height: 18px; }
-
-        .dock {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            padding: 0.75rem 1.5rem;
-            border-radius: 100px;
-            box-shadow: var(--shadow-lg);
-            display: flex;
-            gap: 1.5rem;
-            z-index: 100;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        [data-theme="dark"] .dock {
-            background: rgba(34, 34, 56, 0.8);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .dock-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--text);
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .dock-item:hover { color: var(--primary); transform: translateY(-4px); }
-        .dock-item svg { width: 24px; height: 24px; margin-bottom: 4px; }
-        
-        .tooltip {
-            position: absolute;
-            bottom: 150%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--text);
-            color: var(--surface);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s;
-        }
-        
-        .dock-item:hover .tooltip { opacity: 1; }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-
-        .modal-overlay.open { opacity: 1; pointer-events: all; }
-
-        .modal {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: var(--radius);
-            width: 90%;
-            max-width: 500px;
-            transform: translateY(20px);
-            transition: transform 0.3s;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .modal-overlay.open .modal { transform: translateY(0); }
-
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-        .modal-title { font-size: 1.25rem; font-weight: 700; color: var(--primary); }
-        .modal-close { cursor: pointer; color: var(--text-secondary); }
-
-        .drop-zone {
-            border: 2px dashed var(--border);
-            border-radius: var(--radius);
-            padding: 3rem 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .drop-zone:hover, .drop-zone.dragover { border-color: var(--primary); background: rgba(var(--primary-rgb), 0.05); }
-
-        .report-header { display: none; text-align: right; direction: rtl; margin-bottom: 2rem; border-bottom: 2px solid var(--text); padding-bottom: 1rem; }
-        .report-header p { margin: 0.5rem 0; font-size: 14pt; }
-        .report-header span { font-weight: bold; }
-
-        #toast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-100%);
-            background: var(--text);
-            color: var(--background);
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            z-index: 2000;
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        #toast.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
-        #toast.error { background: var(--danger); color: white; }
-
-        @media print {
-            .no-print, .dock, .theme-toggle, .form-card, .btn { display: none !important; }
-            .grid-layout { display: block; }
-            .card { box-shadow: none; border: none; padding: 0; }
-            body { background: white; color: black; }
-            .report-header { display: block; }
-            td, th { border-bottom: 1px solid #000; padding: 8px; color: black; }
-            .table-container { border: none; }
-            .app-container { padding: 0; margin: 0; max-width: 100%; }
-        }
-
-        .tag {
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 6px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
+        .tag { padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; margin-left: 8px; }
         .tag-new { background: rgba(16, 185, 129, 0.15); color: var(--success); }
         .tag-ext { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+        
+        .action-btn { background: none; border: none; cursor: pointer; color: var(--text-secondary); padding: 4px; border-radius: 50%; }
+        .action-btn:hover { color: var(--danger); background: rgba(239, 68, 68, 0.1); }
+
+        .autocomplete-items {
+            position: absolute;
+            top: 100%; left: 0; right: 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0 0 8px 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 50;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+        .autocomplete-items.show { display: block; }
+        .suggestion { padding: 10px; cursor: pointer; display: flex; justify-content: space-between; }
+        .suggestion:hover, .suggestion.active { background: var(--input-bg); }
+        .suggestion .unit { color: var(--text-secondary); font-size: 0.8em; }
+
+        .dock {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(12px);
+            padding: 10px 25px; border-radius: 50px;
+            display: flex; gap: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            z-index: 100;
+        }
+        [data-theme="dark"] .dock { background: rgba(22, 22, 37, 0.8); border-color: rgba(255,255,255,0.1); }
+        
+        .dock-item { cursor: pointer; color: var(--text); transition: 0.2s; position: relative; display: flex; align-items: center; justify-content: center; }
+        .dock-item:hover { color: var(--primary); transform: translateY(-3px); }
+        .dock-item svg { width: 24px; height: 24px; }
+        
+        .dock-tooltip {
+            position: absolute; bottom: 140%; left: 50%; transform: translateX(-50%);
+            background: var(--text); color: var(--background);
+            padding: 4px 8px; border-radius: 4px; font-size: 12px;
+            opacity: 0; pointer-events: none; transition: 0.2s; white-space: nowrap;
+        }
+        .dock-item:hover .dock-tooltip { opacity: 1; bottom: 150%; }
+
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+            display: none; justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal { background: var(--surface); padding: 2rem; border-radius: var(--radius); width: 90%; max-width: 500px; box-shadow: var(--shadow); }
+        .modal h2 { margin-top: 0; color: var(--primary); }
+
+        .switch { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .switch input { display: none; }
+        .slider { width: 40px; height: 22px; background: var(--border); border-radius: 22px; position: relative; transition: 0.3s; }
+        .slider:before { content: ""; position: absolute; height: 16px; width: 16px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; }
+        input:checked + .slider { background: var(--primary); }
+        input:checked + .slider:before { transform: translateX(18px); }
+
+        .report-header { display: none; text-align: right; direction: rtl; margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px; }
+        .report-header p { margin: 5px 0; font-size: 14pt; color: #000; }
+        
+        @media print {
+            .no-print, .dock, .form-card { display: none !important; }
+            .grid-layout { display: block; }
+            .card { box-shadow: none; border: none; padding: 0; }
+            .table-wrapper { overflow: visible; max-height: none; border: none; }
+            th { position: static; border-bottom: 2px solid #000; color: #000; }
+            td { border-bottom: 1px solid #ddd; color: #000; }
+            body { background: white; color: black; padding: 20px; }
+            .report-header { display: block; }
+        }
+
+        #toast {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            background: var(--success); color: white; padding: 12px 24px;
+            border-radius: 50px; font-weight: 600; opacity: 0; transition: 0.3s;
+            pointer-events: none; z-index: 2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        #toast.show { opacity: 1; top: 40px; }
+        #toast.error { background: var(--danger); }
     </style>
 </head>
 <body>
 
-    <div id="toast">Operation Successful</div>
+    <div id="toast"></div>
 
     <div class="app-container">
         <header class="no-print">
             <h1>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                </svg>
                 PharmaTrack
             </h1>
-            <div style="display: flex; gap: 15px; align-items: center;">
-                 <label class="switch-container" style="display:flex; align-items:center; gap:8px; font-size:0.9rem; font-weight:600;">
-                    <span>Legacy Mode</span>
-                    <input type="checkbox" id="legacyToggle" onchange="toggleLegacyMode()" style="width:auto; margin:0;">
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <label class="switch" title="Toggle Legacy Mode">
+                    <span style="font-size: 0.9rem; font-weight: 600;">Legacy Mode</span>
+                    <input type="checkbox" id="legacyToggle" onchange="toggleLegacyMode()">
+                    <span class="slider"></span>
                 </label>
-                <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme"></div>
+                <div class="switch" onclick="toggleTheme()" title="Toggle Theme" style="background: var(--input-bg); padding: 5px; border-radius: 50%; width: 32px; height: 32px; justify-content: center;">
+                    <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                </div>
             </div>
         </header>
 
@@ -469,7 +279,7 @@
         <div class="grid-layout">
             <div class="form-card no-print">
                 <div class="card">
-                    <h2 style="margin-top:0; color:var(--primary); margin-bottom:1.5rem;">Configuration</h2>
+                    <h3 style="margin-top:0; color: var(--primary);">Settings</h3>
                     
                     <div class="form-group">
                         <label>Region</label>
@@ -483,14 +293,14 @@
 
                     <div class="form-group">
                         <label>Pharmacy</label>
-                        <select id="pharmacySelect" disabled onchange="saveState()">
+                        <select id="pharmacySelect" disabled onchange="handleContextChange()">
                             <option value="">Select Pharmacy</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Month</label>
-                        <select id="monthSelect" onchange="saveState()">
+                        <select id="monthSelect" onchange="handleContextChange()">
                             <option value="">Select Month</option>
                             <option value="January">يناير</option>
                             <option value="February">فبراير</option>
@@ -507,85 +317,85 @@
                         </select>
                     </div>
 
-                    <hr style="border:0; border-top:1px solid var(--border); margin: 2rem 0;">
+                    <hr style="border: 0; border-top: 1px solid var(--border); margin: 1.5rem 0;">
 
-                    <div id="standardInputSection">
-                        <h3 style="font-size:1rem; margin-bottom:1rem;">New Entry</h3>
-                        
-                        <div class="form-group autocomplete-wrapper">
+                    <div id="normalInputSection">
+                        <h3 style="margin-top:0; font-size:1rem;">Add Entry</h3>
+                        <div class="form-group">
                             <label>Product Search</label>
-                            <input type="text" id="productSearch" placeholder="Type to search..." autocomplete="off">
-                            <div id="autocompleteList" class="autocomplete-list"></div>
+                            <input type="text" id="searchInput" placeholder="Search product..." autocomplete="off">
+                            <div id="autocompleteList" class="autocomplete-items"></div>
                         </div>
-
                         <div class="form-group">
                             <label>Units Sold</label>
-                            <input type="number" id="unitsSold" min="0" placeholder="0">
+                            <input type="number" id="unitsInput" min="1" placeholder="0">
                         </div>
-
-                        <button class="btn btn-primary btn-full" onclick="addEntry()">Add to List</button>
-                        <button class="btn btn-secondary btn-full" id="addCustomBtn" onclick="openModal('customModal')" style="margin-top:10px;" disabled>Add Custom Product</button>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <button class="btn btn-primary" onclick="addEntryFromInput()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                Add to List
+                            </button>
+                            <button class="btn btn-secondary" id="customBtn" disabled onclick="openCustomModal()">
+                                Add Custom Product
+                            </button>
+                        </div>
                     </div>
 
-                    <div id="legacyInputSection" style="display:none; text-align:center; color:var(--text-secondary);">
-                        <p>Legacy Mode Active</p>
-                        <small>Edit the table directly.</small>
+                    <div id="legacyInputSection" style="display:none; text-align: center; color: var(--text-secondary); padding: 20px;">
+                        <p><strong>Legacy Mode Active</strong></p>
+                        <p style="font-size: 0.9em;">Edit the table directly.<br>Enter 0 to remove an item.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="card" style="padding:0; overflow:hidden;">
-                <div class="table-container">
-                    <table id="mainTable">
+            <div class="card" style="padding: 0; display: flex; flex-direction: column;">
+                <div class="table-wrapper">
+                    <table id="dataTable">
                         <thead>
                             <tr>
                                 <th>Product Name</th>
-                                <th style="width: 100px;">Unit</th>
-                                <th style="width: 120px;">Units Sold</th>
-                                <th style="width: 50px;" class="no-print"></th>
+                                <th width="120">Unit</th>
+                                <th width="100">Sold</th>
+                                <th width="60" class="no-print"></th>
                             </tr>
                         </thead>
                         <tbody id="tableBody">
-                            <!-- Rows generated by JS -->
                         </tbody>
                     </table>
                 </div>
-                <div id="emptyState" style="padding: 3rem; text-align: center; color: var(--text-secondary);">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:1rem; opacity:0.5;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
-                    <p>No data added yet.</p>
+                <div id="emptyState" style="padding: 40px; text-align: center; color: var(--text-secondary);">
+                    <p>No items added yet.</p>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="dock no-print">
-        <div class="dock-item" onclick="downloadTemplate('csv')">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M8 13h8"></path><path d="M8 17h8"></path><path d="M8 9h8"></path></svg>
-            <span class="tooltip">CSV Template</span>
+        <div class="dock-item" onclick="downloadCSV()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+            <span class="dock-tooltip">Template</span>
         </div>
-        <div class="dock-item" onclick="openModal('importModal')">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#8b6dff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-            <span class="tooltip">Import</span>
+        <div class="dock-item" onclick="document.getElementById('fileInput').click()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+            <span class="dock-tooltip">Import</span>
+            <input type="file" id="fileInput" hidden accept=".csv,.json" onchange="handleImport(this)">
         </div>
         <div class="dock-item" onclick="window.print()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#6b6b7b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-            <span class="tooltip">Print</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+            <span class="dock-tooltip">Print</span>
         </div>
         <div class="dock-item" onclick="submitData()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-            <span class="tooltip">Submit</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="dock-tooltip">Submit</span>
         </div>
     </div>
 
     <div id="customModal" class="modal-overlay">
         <div class="modal">
-            <div class="modal-header">
-                <span class="modal-title">Add Custom Product</span>
-                <span class="modal-close" onclick="closeModal('customModal')">&times;</span>
-            </div>
+            <h2>Add Custom Product</h2>
             <div class="form-group">
-                <label>Reason</label>
-                <select id="customReason">
+                <label>Reason / Category</label>
+                <select id="customCategory">
                     <option value="">Select Reason</option>
                     <option value="قرار لجنة">قرار لجنة</option>
                     <option value="حكم قضائي">حكم قضائي</option>
@@ -595,45 +405,31 @@
             </div>
             <div class="form-group">
                 <label>Product Name</label>
-                <input type="text" id="customName" placeholder="e.g., New Drug X">
+                <input type="text" id="customName">
             </div>
             <div class="form-group">
                 <label>Unit</label>
-                <input type="text" id="customUnit" placeholder="e.g., 10 T">
+                <input type="text" id="customUnit" placeholder="e.g. 10 T">
             </div>
             <div class="form-group">
                 <label>Units Sold</label>
-                <input type="number" id="customSold" placeholder="0">
+                <input type="number" id="customSold">
             </div>
-            <button class="btn btn-primary btn-full" onclick="addCustomProduct()">Add Product</button>
-        </div>
-    </div>
-
-    <div id="importModal" class="modal-overlay">
-        <div class="modal">
-            <div class="modal-header">
-                <span class="modal-title">Import Data</span>
-                <span class="modal-close" onclick="closeModal('importModal')">&times;</span>
-            </div>
-            <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
-                <p style="margin:0; font-weight:600; color:var(--primary);">Click to Upload</p>
-                <p style="margin:5px 0 0; color:var(--text-secondary); font-size:0.85rem;">Support CSV or JSON</p>
-                <input type="file" id="fileInput" accept=".csv, .json" hidden onchange="handleFile(this.files[0])">
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-primary" onclick="addCustomProduct()">Add</button>
+                <button class="btn btn-secondary" onclick="closeModal('customModal')">Cancel</button>
             </div>
         </div>
     </div>
 
     <div id="bulkReasonModal" class="modal-overlay">
         <div class="modal" style="max-width: 600px;">
-            <div class="modal-header">
-                <span class="modal-title">Missing Categories</span>
+            <h2>Missing Categories</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 15px;">Imported external items must have a category.</p>
+            <div style="max-height: 300px; overflow-y: auto;">
+                <table id="bulkReasonTable"></table>
             </div>
-            <p style="margin-bottom: 1rem; color: var(--text-secondary);">Some imported external items need a reason for addition.</p>
-            <div style="max-height: 300px; overflow-y: auto; margin-bottom: 1rem;">
-                <table id="bulkReasonTable">
-                </table>
-            </div>
-            <button class="btn btn-primary btn-full" onclick="saveBulkReasons()">Save Reasons</button>
+            <button class="btn btn-primary" onclick="saveBulkReasons()" style="margin-top: 15px;">Save & Continue</button>
         </div>
     </div>
 
@@ -651,17 +447,10 @@
             appId: "1:647093759607:web:e5086e95ec5b378ea4e072",
             measurementId: "G-S9S6T513SD"
         };
-        
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        const regionData = {
-            first: ["كفر الدوار سكر", "كفر الدوار الشاملة 1" , "كفر الدوار الشاملة 2", "كفر الدوار مسائي", "النوبارية", "البيضا", "ابو المطامير", "رشيد", "ادكو"],
-            second: ["دمنهور الشاملة 1", "دمنهور الشاملة 2", "دمنهور مسائي", "دمنهور سكر", "دمنهور اورام", "الشرطة", "حوش عيسي", "المحمودية مسائي", "المحمودية", "الرحمانية", "ابو حمص"],
-            third: ["ايتاي الشاملة 1", "ايتاي الشاملة 2 ",   "ايتاي مسائي ","كوم حمادة", "كوم حمادة مسائي", "بدر","شبراخيت مسائي", "شبراخيت","الدلنجات مسائي", "الدلنجات", "وادي النطرون", "قليشان"]
-        };
-
-        const rawProducts = [
+        const standardProducts = [
             "Antacid Syp|B", "Acetazolamide 250mg|10 T", "Acetylcysteine Sachets|10 Sach",
             "Acetylsalicylic Acid 75mg|10 T", "Acetylsalicylic Acid 81mg|10 T", "Acyclovir 0.05 cream|Tube",
             "Aescin gel|Tube", "Allopurinol 100mg|10 T", "Alpha Chymotrypsin|Amp", "Alpha Lipoic Acid 300mg|10 T",
@@ -777,43 +566,38 @@
             "Vinorelbine 50mg|Vial", "Vitamin A|10 T", "Vitamin B amp|Amp", "Vitamin B comp|10 T", "Vitamin E 400|12 Cap",
             "Vitamin K|10 T", "Voriconazole 50mg|10 T", "Warfarin 1mg|10 T", "Warfarin 3mg|10 T", "Warfarin 5 mg|10 T",
             "Xarelto 20mg|28 T", "Xgeva|Vial", "Zoledronic 4mg|Vial"
-        ];
+        ].sort();
 
-        let appState = {
-            data: [], 
-            isLegacy: false,
-            legacyFocus: null
+        const regionOptions = {
+            first: ["كفر الدوار سكر", "كفر الدوار الشاملة 1" , "كفر الدوار الشاملة 2", "كفر الدوار مسائي", "النوبارية", "البيضا", "ابو المطامير", "رشيد", "ادكو"],
+            second: ["دمنهور الشاملة 1", "دمنهور الشاملة 2", "دمنهور مسائي", "دمنهور سكر", "دمنهور اورام", "الشرطة", "حوش عيسي", "المحمودية مسائي", "المحمودية", "الرحمانية", "ابو حمص"],
+            third: ["ايتاي الشاملة 1", "ايتاي الشاملة 2 ",   "ايتاي مسائي ","كوم حمادة", "كوم حمادة مسائي", "بدر","شبراخيت مسائي", "شبراخيت","الدلنجات مسائي", "الدلنجات", "وادي النطرون", "قليشان"]
         };
 
-        const standardProducts = rawProducts.sort();
+        const regionMap = { "first": "الاولى", "second": "الثانية", "third": "الثالثة" };
+        const monthMap = { "January": "يناير", "February": "فبراير", "March": "مارس", "April": "ابريل", "May": "مايو", "June": "يونيو", "July": "يوليو", "August": "اغسطس", "September": "سبتمبر", "October": "اكتوبر", "November": "نوفمبر", "December": "ديسمبر" };
 
+        let addedData = []; 
+        let isLegacyMode = false;
 
-        function init() {
+        window.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
+            if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+            else if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-theme', 'dark');
 
             const savedData = localStorage.getItem('pharmacyData');
-            if (savedData) appState.data = JSON.parse(savedData);
-            
-            ['region', 'pharmacy', 'month'].forEach(k => {
-                const val = localStorage.getItem(`selected${k.charAt(0).toUpperCase() + k.slice(1)}`);
-                if(val) document.getElementById(`${k}Select`).value = val;
+            if (savedData) addedData = JSON.parse(savedData);
+
+            ['region', 'pharmacy', 'month'].forEach(key => {
+                const val = localStorage.getItem('sel_' + key);
+                if(val) document.getElementById(key + 'Select').value = val;
             });
 
-            handleRegionChange(true);
-            updateUI();
-            
-            document.getElementById('productSearch').addEventListener('input', handleSearch);
-            document.addEventListener('click', (e) => {
-                if(!e.target.closest('.autocomplete-wrapper')) {
-                    document.getElementById('autocompleteList').classList.remove('active');
-                }
-            });
-        }
+            handleRegionChange(true); 
+            renderTable();
+            checkContext();
+        });
+
 
         function toggleTheme() {
             const current = document.documentElement.getAttribute('data-theme');
@@ -822,336 +606,317 @@
             localStorage.setItem('theme', target);
         }
 
-        function handleRegionChange(skipSave = false) {
-            const region = document.getElementById("regionSelect").value;
-            const pharmSelect = document.getElementById("pharmacySelect");
-            const currentPharm = pharmSelect.value;
-            
-            pharmSelect.innerHTML = '<option value="">Select Pharmacy</option>';
-            
-            if (regionData[region]) {
-                regionData[region].forEach(p => {
-                    const opt = document.createElement("option");
-                    opt.value = p;
-                    opt.textContent = p;
-                    pharmSelect.appendChild(opt);
-                });
-                pharmSelect.disabled = false;
-                if(currentPharm && regionData[region].includes(currentPharm)) {
-                    pharmSelect.value = currentPharm;
-                }
-            } else {
-                pharmSelect.disabled = true;
-            }
-            if(!skipSave) saveState();
-            checkFormValidity();
+        function toggleLegacyMode() {
+            isLegacyMode = document.getElementById('legacyToggle').checked;
+            document.getElementById('normalInputSection').style.display = isLegacyMode ? 'none' : 'block';
+            document.getElementById('legacyInputSection').style.display = isLegacyMode ? 'block' : 'none';
+            renderTable();
         }
 
-        function saveState() {
-            const r = document.getElementById("regionSelect").value;
-            const p = document.getElementById("pharmacySelect").value;
-            const m = document.getElementById("monthSelect").value;
-            
-            localStorage.setItem('selectedRegion', r);
-            localStorage.setItem('selectedPharmacy', p);
-            localStorage.setItem('selectedMonth', m);
-            localStorage.setItem('pharmacyData', JSON.stringify(appState.data));
+        function handleRegionChange(skipSave = false) {
+            const r = document.getElementById('regionSelect').value;
+            const pSel = document.getElementById('pharmacySelect');
+            const savedP = pSel.value;
 
-            const regionMap = { "first": "الاولى", "second": "الثانية", "third": "الثالثة" };
-            const monthMap = {
-                "January": "يناير", "February": "فبراير", "March": "مارس", "April": "ابريل",
-                "May": "مايو", "June": "يونيو", "July": "يوليو", "August": "اغسطس",
-                "September": "سبتمبر", "October": "اكتوبر", "November": "نوفمبر", "December": "ديسمبر"
-            };
+            pSel.innerHTML = '<option value="">Select Pharmacy</option>';
+            if(regionOptions[r]) {
+                regionOptions[r].forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p;
+                    opt.textContent = p;
+                    pSel.appendChild(opt);
+                });
+                pSel.disabled = false;
+                if(regionOptions[r].includes(savedP)) pSel.value = savedP;
+            } else {
+                pSel.disabled = true;
+            }
+
+            if(!skipSave) handleContextChange();
+        }
+
+        function handleContextChange() {
+            const r = document.getElementById('regionSelect').value;
+            const p = document.getElementById('pharmacySelect').value;
+            const m = document.getElementById('monthSelect').value;
+            
+            localStorage.setItem('sel_region', r);
+            localStorage.setItem('sel_pharmacy', p);
+            localStorage.setItem('sel_month', m);
 
             document.getElementById('printRegion').textContent = regionMap[r] || "";
             document.getElementById('printPharmacy').textContent = p || "";
             document.getElementById('printMonth').textContent = monthMap[m] || "";
-            
-            checkFormValidity();
+
+            checkContext();
         }
 
-        function checkFormValidity() {
-            const r = document.getElementById("regionSelect").value;
-            const p = document.getElementById("pharmacySelect").value;
-            const m = document.getElementById("monthSelect").value;
-            const valid = r && p && m;
-            document.getElementById('addCustomBtn').disabled = !valid;
+        function checkContext() {
+            const valid = document.getElementById('regionSelect').value && 
+                          document.getElementById('pharmacySelect').value && 
+                          document.getElementById('monthSelect').value;
+            
+            document.getElementById('customBtn').disabled = !valid;
             return valid;
         }
 
-
-        function handleSearch(e) {
-            const val = e.target.value.toLowerCase();
-            const list = document.getElementById('autocompleteList');
-            list.innerHTML = '';
-            
-            if (!val) { list.classList.remove('active'); return; }
-
-            const matches = standardProducts.filter(p => p.toLowerCase().includes(val));
-            
-            matches.forEach(prod => {
-                const [name, unit] = prod.split('|');
-                const div = document.createElement('div');
-                div.className = 'suggestion-item';
-                
-                const exists = appState.data.some(d => d.name === name && d.unit === unit);
-                if (exists) div.classList.add('exists');
-
-                div.innerHTML = `<span>${name}</span><span class="unit">${unit}</span>`;
-                div.onclick = () => {
-                    document.getElementById('productSearch').value = prod;
-                    list.classList.remove('active');
-                    document.getElementById('unitsSold').focus();
-                };
-                list.appendChild(div);
-            });
-
-            if (matches.length > 0) list.classList.add('active');
-            else list.classList.remove('active');
+        function saveData() {
+            localStorage.setItem('pharmacyData', JSON.stringify(addedData));
         }
 
-        function addEntry() {
-            if (!checkFormValidity()) { showToast("Select Region, Pharmacy, and Month first", true); return; }
+        function updateData(name, unit, sold, method, category = null) {
+            const idx = addedData.findIndex(d => d.name === name && d.unit === unit);
             
-            const rawInput = document.getElementById('productSearch').value;
-            const soldInput = document.getElementById('unitsSold').value;
-            
-            if (!rawInput || !soldInput) return;
-
-            const isStandard = standardProducts.includes(rawInput);
-            
-            if (!isStandard) {
-                 const existing = appState.data.find(d => `${d.name}|${d.unit}` === rawInput);
-                 if(!existing) {
-                     showToast("Use 'Add Custom Product' for items not in the list.", true);
-                     return;
-                 }
-            }
-
-            const [name, unit] = rawInput.split('|');
-            updateOrAddData(name, unit, parseInt(soldInput), isStandard ? 'old' : 'new');
-            
-            document.getElementById('productSearch').value = '';
-            document.getElementById('unitsSold').value = '';
-            document.getElementById('productSearch').focus();
-        }
-
-        function addCustomProduct() {
-            const cat = document.getElementById('customReason').value;
-            const name = document.getElementById('customName').value;
-            const unit = document.getElementById('customUnit').value;
-            const sold = document.getElementById('customSold').value;
-
-            if (!cat || !name || !unit || !sold) return;
-
-            updateOrAddData(name, unit, parseInt(sold), 'new', cat);
-            closeModal('customModal');
-            
-            document.getElementById('customReason').value = "";
-            document.getElementById('customName').value = "";
-            document.getElementById('customUnit').value = "";
-            document.getElementById('customSold').value = "";
-        }
-
-        function updateOrAddData(name, unit, sold, method, category = null) {
-            const idx = appState.data.findIndex(d => d.name === name && d.unit === unit);
-            const r = document.getElementById("regionSelect").value;
-            const p = document.getElementById("pharmacySelect").value;
-            const m = document.getElementById("monthSelect").value;
-
-            if (idx > -1) {
-                appState.data[idx].sold = sold; // Update logic: replace or add? Requirement implies replacement/update.
-                appState.data[idx].region = r;
-                appState.data[idx].pharmacy = p;
-                appState.data[idx].month = m;
-                if(category) appState.data[idx].category = category;
+            if (sold <= 0) {
+                if(idx > -1) addedData.splice(idx, 1);
             } else {
-                appState.data.push({ name, unit, sold, method, category, region: r, pharmacy: p, month: m });
+                if(idx > -1) {
+                    addedData[idx].sold = sold;
+                    if(category) addedData[idx].category = category;
+                } else {
+                    addedData.push({ name, unit, sold, method, category });
+                }
             }
-            
-            saveState();
-            updateUI();
+            saveData();
+            renderTable();
         }
 
 
-        function toggleLegacyMode() {
-            appState.isLegacy = document.getElementById('legacyToggle').checked;
-            if (appState.isLegacy && !checkFormValidity()) {
-                alert("Please configure Region, Pharmacy, and Month first.");
-                document.getElementById('legacyToggle').checked = false;
-                appState.isLegacy = false;
-            }
-            
-            document.getElementById('standardInputSection').style.display = appState.isLegacy ? 'none' : 'block';
-            document.getElementById('legacyInputSection').style.display = appState.isLegacy ? 'block' : 'none';
-            
-            updateUI();
-        }
-
-        function updateUI() {
+        function renderTable() {
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
 
-            const listToRender = appState.isLegacy ? standardProducts.map(p => {
-                const [n, u] = p.split('|');
-                const existing = appState.data.find(d => d.name === n && d.unit === u);
-                return { name: n, unit: u, sold: existing ? existing.sold : '', isPhantom: !existing };
-            }) : appState.data.sort((a,b) => a.name.localeCompare(b.name));
+            let listToRender = [];
 
-            if (listToRender.length === 0 && !appState.isLegacy) {
-                document.getElementById('emptyState').style.display = 'block';
-                document.getElementById('mainTable').style.display = 'none';
+            if (isLegacyMode) {
+                const dataMap = new Map(addedData.map(d => [`${d.name}|${d.unit}`, d]));
+                
+                standardProducts.forEach(prod => {
+                    const [n, u] = prod.split('|');
+                    const existing = dataMap.get(prod);
+                    listToRender.push({
+                        name: n, unit: u,
+                        sold: existing ? existing.sold : '',
+                        isCustom: false
+                    });
+                    if(existing) dataMap.delete(prod); 
+                });
+
+                dataMap.forEach(d => {
+                    listToRender.push({
+                        name: d.name, unit: d.unit, sold: d.sold, isCustom: true, category: d.category
+                    });
+                });
+
             } else {
-                document.getElementById('emptyState').style.display = 'none';
-                document.getElementById('mainTable').style.display = 'table';
+                listToRender = addedData.map(d => ({
+                    name: d.name, unit: d.unit, sold: d.sold, 
+                    isCustom: d.method === 'new', category: d.category
+                })).sort((a,b) => a.name.localeCompare(b.name));
             }
 
-            listToRender.forEach((item, index) => {
+            if(listToRender.length === 0 && !isLegacyMode) {
+                document.getElementById('emptyState').style.display = 'block';
+                document.getElementById('dataTable').style.display = 'none';
+                return;
+            } else {
+                document.getElementById('emptyState').style.display = 'none';
+                document.getElementById('dataTable').style.display = 'table';
+            }
+
+            listToRender.forEach(row => {
                 const tr = document.createElement('tr');
-                
-                let nameHtml = `<strong>${item.name}</strong>`;
-                if (!appState.isLegacy) {
-                     if (item.method === 'new') nameHtml += `<span class="tag tag-new">New</span>`;
-                     if (item.category) nameHtml += `<span class="tag tag-ext">${item.category}</span>`;
-                }
-                
+                let nameHTML = `<strong>${row.name}</strong>`;
+                if(row.isCustom) nameHTML += ` <span class="tag tag-new">New</span>`;
+                if(row.category) nameHTML += ` <span class="tag tag-ext">${row.category}</span>`;
+
+                const isEditable = isLegacyMode || !isLegacyMode; 
+
                 tr.innerHTML = `
-                    <td>${nameHtml}</td>
-                    <td><span style="color:var(--text-secondary); font-size:0.9em;">${item.unit}</span></td>
-                    <td contenteditable="true" 
-                        onblur="handleInlineEdit(this, '${item.name}', '${item.unit}')"
-                        onkeydown="handleKeyNav(event, this)"
-                        inputmode="numeric"
-                        class="editable-cell"
-                    >${item.sold}</td>
+                    <td>${nameHTML}</td>
+                    <td><span style="color:var(--text-secondary); font-size:0.9em">${row.unit}</span></td>
+                    <td contenteditable="true" inputmode="numeric" 
+                        onblur="handleInlineEdit(this, '${row.name}', '${row.unit}', ${row.isCustom})"
+                        onkeydown="handleEnter(event, this)">${row.sold}</td>
                     <td class="no-print">
-                        ${!appState.isLegacy ? `<button class="icon-btn" onclick="deleteRow('${item.name}', '${item.unit}')"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>` : ''}
+                        ${!isLegacyMode ? `<button class="action-btn" onclick="removeItem('${row.name}', '${row.unit}')"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>` : ''}
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        function handleInlineEdit(el, name, unit) {
-            const val = parseInt(el.innerText.replace(/[^0-9]/g, ''));
-            if (isNaN(val)) {
-                if (appState.isLegacy) {
-                    const idx = appState.data.findIndex(d => d.name === name && d.unit === unit);
-                    if(idx > -1) {
-                         appState.data.splice(idx, 1);
-                         saveState();
-                    }
-                    el.innerText = '';
-                } else {
-                    const item = appState.data.find(d => d.name === name && d.unit === unit);
-                    el.innerText = item ? item.sold : 0;
-                }
+        function handleInlineEdit(el, name, unit, isCustom) {
+            const val = parseInt(el.textContent.replace(/[^0-9]/g, ''));
+            if(isNaN(val)) {
+                const exists = addedData.find(d => d.name === name && d.unit === unit);
+                el.textContent = exists ? exists.sold : '';
                 return;
             }
-
-            const isKnown = standardProducts.includes(`${name}|${unit}`);
-            updateOrAddData(name, unit, val, isKnown ? 'old' : 'new');
+            updateData(name, unit, val, isCustom ? 'new' : 'old');
         }
 
-        function handleKeyNav(e, el) {
-            if (e.key === 'Enter') {
+        function handleEnter(e, el) {
+            if(e.key === 'Enter') {
                 e.preventDefault();
                 el.blur();
-                const tr = el.closest('tr');
-                if (tr.nextElementSibling) {
-                    const nextCell = tr.nextElementSibling.cells[2];
-                    nextCell.focus();
+                const nextRow = el.closest('tr').nextElementSibling;
+                if(nextRow) {
+                    const nextCell = nextRow.querySelector('[contenteditable]');
+                    if(nextCell) nextCell.focus();
                 }
             }
         }
 
-        function deleteRow(name, unit) {
-            appState.data = appState.data.filter(d => !(d.name === name && d.unit === unit));
-            saveState();
-            updateUI();
+        function removeItem(name, unit) {
+            updateData(name, unit, 0, 'old');
         }
 
-        function openModal(id) { document.getElementById(id).classList.add('open'); }
-        function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
+        const searchInput = document.getElementById('searchInput');
+        const autoList = document.getElementById('autocompleteList');
 
-        function downloadTemplate(type) {
-            if (type === 'csv') {
-                let content = "month,region,pharmacy,name,unit,unitSold\n";
-                const source = appState.data.length ? appState.data : [{name:"ExampleItem", unit:"10 T", sold:10, month:"January", region:"first", pharmacy:"Test"}];
-                source.forEach(i => {
-                    content += `${i.month||"January"},${i.region||"first"},${i.pharmacy||"Test"},"${i.name}","${i.unit}",${i.sold}\n`;
-                });
-                downloadBlob(content, 'pharmacy_data.csv', 'text/csv');
+        searchInput.addEventListener('input', function() {
+            const val = this.value.toLowerCase();
+            autoList.innerHTML = '';
+            if(!val) { autoList.classList.remove('show'); return; }
+
+            const matches = standardProducts.filter(p => p.toLowerCase().includes(val));
+            
+            matches.forEach(m => {
+                const [n, u] = m.split('|');
+                const div = document.createElement('div');
+                div.className = 'suggestion';
+                div.innerHTML = `<span>${n}</span> <span class="unit">${u}</span>`;
+                div.onclick = () => {
+                    searchInput.value = m; 
+                    searchInput.setAttribute('data-sel-name', n);
+                    searchInput.setAttribute('data-sel-unit', u);
+                    searchInput.value = n; 
+                    autoList.classList.remove('show');
+                    document.getElementById('unitsInput').focus();
+                };
+                autoList.appendChild(div);
+            });
+            
+            if(matches.length) autoList.classList.add('show');
+            else autoList.classList.remove('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            if(e.target !== searchInput) autoList.classList.remove('show');
+        });
+
+        function addEntryFromInput() {
+            if(!checkContext()) { showToast('Select Region, Pharmacy & Month first', true); return; }
+
+            const n = searchInput.getAttribute('data-sel-name');
+            const u = searchInput.getAttribute('data-sel-unit');
+            const val = parseInt(document.getElementById('unitsInput').value);
+
+            if(!n || !u) {
+                 showToast("Please select a product from the list or use Custom.", true);
+                 return;
             }
+
+            if(!val || val <= 0) { showToast("Enter valid quantity", true); return; }
+
+            updateData(n, u, val, 'old');
+            searchInput.value = '';
+            searchInput.removeAttribute('data-sel-name');
+            searchInput.removeAttribute('data-sel-unit');
+            document.getElementById('unitsInput').value = '';
+            searchInput.focus();
         }
 
-        function downloadBlob(content, filename, mime) {
-            const blob = new Blob([content], {type: mime});
+        function openCustomModal() { document.getElementById('customModal').style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function addCustomProduct() {
+            const cat = document.getElementById('customCategory').value;
+            const name = document.getElementById('customName').value;
+            const unit = document.getElementById('customUnit').value;
+            const sold = parseInt(document.getElementById('customSold').value);
+
+            if(!cat || !name || !unit || !sold) { showToast("Fill all fields", true); return; }
+
+            updateData(name, unit, sold, 'new', cat);
+            closeModal('customModal');
+            
+            document.getElementById('customName').value = '';
+            document.getElementById('customUnit').value = '';
+            document.getElementById('customSold').value = '';
+        }
+
+
+        function downloadCSV() {
+            const r = document.getElementById('regionSelect').value || 'Region';
+            const p = document.getElementById('pharmacySelect').value || 'Pharmacy';
+            const m = document.getElementById('monthSelect').value || 'Month';
+            
+            let csv = "month,region,pharmacy,name,unit,unitSold\n";
+            const source = addedData.length ? addedData : standardProducts.slice(0,1).map(x => {
+                const [n,u] = x.split('|'); return {name: n, unit: u, sold: 10}; 
+            });
+
+            source.forEach(d => {
+                csv += `${m},${r},"${p}","${d.name}","${d.unit}",${d.sold}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = url; a.download = filename;
-            a.click();
-            URL.revokeObjectURL(url);
+            a.href = url; a.download = 'pharmacy_data.csv';
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
 
-        function handleFile(file) {
+        function handleImport(input) {
+            const file = input.files[0];
             if(!file) return;
+            
             const reader = new FileReader();
             reader.onload = (e) => {
                 const txt = e.target.result;
-                if (file.name.endsWith('.json')) parseImport(JSON.parse(txt));
-                else if (file.name.endsWith('.csv')) parseCSV(txt);
-                closeModal('importModal');
+                let count = 0;
+                
+                try {
+                    const lines = txt.split('\n');
+                    lines.forEach((l, i) => {
+                        if(i===0 || !l.trim()) return;
+                        const matches = l.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+                        if(matches && matches.length >= 6) {
+                            const cols = l.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
+                            const name = cols[3];
+                            const unit = cols[4];
+                            const sold = parseInt(cols[5]);
+                            
+                            if(name && !isNaN(sold)) {
+                                const full = `${name}|${unit}`;
+                                const isStd = standardProducts.includes(full);
+                                updateData(name, unit, sold, isStd ? 'old' : 'new');
+                                count++;
+                            }
+                        }
+                    });
+                    showToast(`Imported ${count} items`);
+                    checkMissingReasons();
+                } catch(err) {
+                    showToast("Error parsing file", true);
+                }
             };
             reader.readAsText(file);
-        }
-
-        function parseCSV(txt) {
-            const lines = txt.split('\n');
-            const data = [];
-            lines.forEach((l, i) => {
-                if (i===0 || !l.trim()) return;
-                const cols = l.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
-                if(cols.length >= 6) {
-                    data.push({ name: cols[3], unit: cols[4], unitSold: parseInt(cols[5]) });
-                }
-            });
-            parseImport(data);
-        }
-
-        function parseImport(imported) {
-            const currentR = document.getElementById("regionSelect").value;
-            const currentP = document.getElementById("pharmacySelect").value;
-            const currentM = document.getElementById("monthSelect").value;
-
-            if(!currentR || !currentP || !currentM) { showToast("Set Region/Pharmacy/Month first", true); return; }
-
-            let count = 0;
-            imported.forEach(item => {
-                if(!item.name || !item.unitSold) return;
-                
-                const fullStr = `${item.name}|${item.unit||""}`;
-                const method = standardProducts.includes(fullStr) ? 'old' : 'new';
-                
-                updateOrAddData(item.name, item.unit, item.unitSold, method, item.category || null);
-                count++;
-            });
-            
-            showToast(`Imported ${count} items`);
-            checkMissingReasons();
+            input.value = '';
         }
 
         function checkMissingReasons() {
-            const missing = appState.data.filter(d => d.method === 'new' && !d.category);
-            if (missing.length > 0) {
-                const table = document.getElementById('bulkReasonTable');
-                table.innerHTML = missing.map(m => `
+            const missing = addedData.filter(d => d.method === 'new' && !d.category);
+            if(missing.length) {
+                const tbl = document.getElementById('bulkReasonTable');
+                tbl.innerHTML = missing.map((d, i) => `
                     <tr>
-                        <td>${m.name}</td>
-                        <td>
-                            <select class="bulk-reason-select" data-key="${m.name}|${m.unit}">
+                        <td style="padding:10px; border-bottom:1px solid #eee;">${d.name} <small style="color:#888">${d.unit}</small></td>
+                        <td style="padding:10px; border-bottom:1px solid #eee;">
+                            <select id="reason_${i}" class="bulk-select" style="width:100%">
                                 <option value="">Select Reason</option>
                                 <option value="قرار لجنة">قرار لجنة</option>
                                 <option value="حكم قضائي">حكم قضائي</option>
@@ -1161,62 +926,66 @@
                         </td>
                     </tr>
                 `).join('');
-                openModal('bulkReasonModal');
+                document.getElementById('bulkReasonModal').style.display = 'flex';
             }
         }
 
         function saveBulkReasons() {
-            const selects = document.querySelectorAll('.bulk-reason-select');
+            const missing = addedData.filter(d => d.method === 'new' && !d.category);
             let allSet = true;
-            selects.forEach(s => {
-                if(!s.value) allSet = false;
-                else {
-                    const [n, u] = s.dataset.key.split('|');
-                    const idx = appState.data.findIndex(d => d.name === n && d.unit === u);
-                    if(idx > -1) appState.data[idx].category = s.value;
-                }
+            
+            missing.forEach((d, i) => {
+                const val = document.getElementById(`reason_${i}`).value;
+                if(!val) allSet = false;
+                else d.category = val;
             });
 
-            if(!allSet) { alert("Please select all reasons."); return; }
+            if(!allSet) { alert("Please select reasons for all items"); return; }
+            
+            saveData();
+            renderTable();
             closeModal('bulkReasonModal');
-            saveState();
-            updateUI();
         }
 
         function submitData() {
-            if (appState.data.length === 0) { showToast("List is empty", true); return; }
-            if (!checkFormValidity()) return;
+            if(!checkContext()) { showToast("Missing details", true); return; }
+            if(addedData.length === 0) { showToast("List is empty", true); return; }
             
-             const missing = appState.data.filter(d => d.method === 'new' && !d.category);
-             if(missing.length > 0) { checkMissingReasons(); return; }
+            const missing = addedData.filter(d => d.method === 'new' && !d.category);
+            if(missing.length) { checkMissingReasons(); return; }
 
-            const payload = appState.data.map(d => ({
-                ...d,
+            const r = document.getElementById('regionSelect').value;
+            const p = document.getElementById('pharmacySelect').value;
+            const m = document.getElementById('monthSelect').value;
+
+            const payload = addedData.map(d => ({
+                month: m, region: r, pharmacy: p,
                 name: (d.method === 'new' && d.category !== 'داخل اللستة') ? `${d.name} (${d.category})` : d.name,
+                unit: d.unit,
+                unitSold: d.sold,
+                category: d.category || 'N/A',
                 timestamp: new Date().toISOString()
             }));
 
             db.ref('pharmacyData').push(payload)
                 .then(() => {
                     showToast("Submitted Successfully");
-                    appState.data = [];
-                    saveState();
-                    updateUI();
+                    addedData = [];
+                    saveData();
+                    renderTable();
                 })
                 .catch(e => {
                     console.error(e);
-                    showToast("Submission Failed", true);
+                    showToast("Error submitting", true);
                 });
         }
 
-        function showToast(msg, isError = false) {
+        function showToast(msg, isErr) {
             const t = document.getElementById('toast');
-            t.innerText = msg;
-            t.className = isError ? 'error visible' : 'visible';
+            t.textContent = msg;
+            t.className = isErr ? 'error show' : 'show';
             setTimeout(() => t.className = '', 3000);
         }
-
-        window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
